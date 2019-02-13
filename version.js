@@ -25,11 +25,14 @@ async function version(prop, arg, dot) {
     path = join(path, "package.json")
   }
 
+  var pkg
+
   if (await fs.pathExists(path)) {
-    const {
-      dependencies,
-      devDependencies,
-    } = await fs.readJson(path)
+    pkg = await fs.readJson(path)
+  }
+
+  if (pkg) {
+    const { dependencies, devDependencies } = pkg
 
     await Promise.all([
       setVersions(dot, dependencies),
@@ -41,8 +44,19 @@ async function version(prop, arg, dot) {
     count: paths.length,
   })
 
-  if (paths.indexOf(arg.path) === 0) {
-    dot.log(dot.get("versions"))
+  if (pkg) {
+    const { dependencies, devDependencies } = pkg
+
+    for (const name in dependencies) {
+      dependencies[name] = dot.get("versions", name)
+    }
+
+    for (const name in devDependencies) {
+      devDependencies[name] = dot.get("versions", name)
+    }
+
+    // await fs.writeJson(path, pkg, { spaces: 2 })
+    dot.log("writeJson", path, pkg)
   }
 }
 
