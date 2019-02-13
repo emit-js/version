@@ -55,8 +55,7 @@ async function version(prop, arg, dot) {
       devDependencies[name] = dot.get("versions", name)
     }
 
-    // await fs.writeJson(path, pkg, { spaces: 2 })
-    dot.log("writeJson", path, pkg)
+    await fs.writeJson(path, pkg, { spaces: 2 })
   }
 }
 
