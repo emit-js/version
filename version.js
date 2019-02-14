@@ -32,9 +32,15 @@ async function version(prop, arg, dot) {
   }
 
   if (pkg) {
-    const { dependencies, devDependencies } = pkg
+    const {
+      dependencies,
+      devDependencies,
+      name,
+      version,
+    } = pkg
 
     await Promise.all([
+      setVersions(dot, { [name]: version }),
       setVersions(dot, dependencies),
       setVersions(dot, devDependencies),
     ])
