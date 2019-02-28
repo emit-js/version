@@ -9,9 +9,6 @@ module.exports = function(dot, opts) {
 
   dot.state.version = opts || {}
 
-  require("@dot-event/store")(dot)
-  require("@dot-event/wait")(dot)
-
   dot.any("version", version)
 }
 
