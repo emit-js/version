@@ -38,6 +38,12 @@
     "jest": "24.1.0",
     "babel-core": "7.0.0-bridge.0"
   },
+  "dot": {
+    "dependencies": [
+      "@dot-event/store",
+      "@dot-event/wait"
+    ]
+  },
   "operations": {
     "watchman": {
       "triggers": [
