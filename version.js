@@ -2,12 +2,14 @@ import fs from "fs-extra"
 import { join } from "path"
 import semver from "semver"
 
-module.exports = function(dot, opts) {
-  if (dot.state.version) {
+module.exports = function(dot) {
+  if (dot.version) {
     return
   }
 
-  dot.state.version = opts || {}
+  dot("dependencies", "version", {
+    arg: ["@dot-event/store", "@dot-event/wait"],
+  })
 
   dot.any("version", version)
 }
