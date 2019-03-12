@@ -77,11 +77,11 @@
       "@babel/plugin-transform-runtime"
     ]
   },
-  "main": "versionDist.js",
+  "main": "dist/version.js",
   "scripts": {
-    "build": "babel version.js --out-file versionDist.js --source-maps",
+    "build": "rm -rf dist; babel *.js --out-dir dist --source-maps",
     "prepublishOnly": "npm run build",
-    "watch": "babel version.js --watch --out-file versionDist.js --source-maps",
+    "watch": "babel version.js --watch --out-dir dist --source-maps",
     "fix": "npm run lint -- --fix",
     "lint": "eslint --ignore-path .gitignore --ext=js .",
     "pretty": "prettier --write **/*.css **/*.json **/*.md",
@@ -182,7 +182,7 @@
   },
   "jest": {
     "testMatch": [
-      "<rootDir>/**/*Test.js"
+      "<rootDir>/test/**/*Test.js"
     ],
     "testEnvironment": "node"
   }
