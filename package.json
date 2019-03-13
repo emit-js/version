@@ -1,6 +1,6 @@
 {
   "name": "@dot-event/version",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "dot-event package.json versioning",
   "keywords": [
     "dot-event",
