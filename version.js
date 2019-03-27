@@ -27,7 +27,7 @@ module.exports = function(dot) {
 async function version(prop, arg, dot) {
   const paths = await dot.glob(prop, {
     absolute: true,
-    pattern: "{" + arg.paths.join(",") + "}",
+    pattern: arg.paths,
   })
 
   return Promise.all(
