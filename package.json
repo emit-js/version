@@ -1,6 +1,6 @@
 {
   "name": "@dot-event/version",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "dot-event package.json versioning",
   "keywords": [
     "dot-event",
@@ -26,10 +26,10 @@
     "@babel/plugin-proposal-object-rest-spread": "7.4.0",
     "@babel/plugin-transform-runtime": "7.4.0",
     "@babel/preset-env": "7.4.2",
-    "@dot-event/args": "1.0.3",
-    "@dot-event/glob": "0.0.8",
-    "@dot-event/store": "7.0.17",
-    "@dot-event/wait": "0.0.6",
+    "@dot-event/args": "1.0.4",
+    "@dot-event/glob": "0.0.9",
+    "@dot-event/store": "7.0.18",
+    "@dot-event/wait": "0.0.7",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
     "eslint": "5.16.0",
