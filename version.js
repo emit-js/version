@@ -1,31 +1,29 @@
-module.exports = function(dot) {
-  if (dot.version) {
+module.exports = function(emit) {
+  if (emit.version) {
     return
   }
 
-  dot("dependencies", "version", {
-    arg: [
-      "@dot-event/args",
-      "@dot-event/glob",
-      "@dot-event/store",
-      "@dot-event/wait",
-    ],
-  })
+  emit("dependencies", "version", [
+    "@emit-js/args",
+    "@emit-js/glob",
+    "@emit-js/store",
+    "@emit-js/wait",
+  ])
 
-  dot("args", "version", {
+  emit("args", "version", {
     paths: {
       alias: ["_", "p"],
       default: [],
     },
   })
 
-  require("./versionProject")(dot)
+  require("./versionProject")(emit)
 
-  dot.any("version", version)
+  emit.any("version", version)
 }
 
-async function version(prop, arg, dot) {
-  const paths = await dot.glob(prop, {
+async function version(arg, prop, emit) {
+  const paths = await emit.glob(prop, {
     absolute: true,
     pattern: arg.paths,
   })
@@ -33,7 +31,7 @@ async function version(prop, arg, dot) {
   return Promise.all(
     paths.map(
       async path =>
-        await dot.versionProject(prop, {
+        await emit.versionProject(prop, {
           ...arg,
           path,
           paths,

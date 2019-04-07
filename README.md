@@ -1,5 +1,5 @@
-# @dot-event/version
+# @emit-js/version
 
-dot-event package.json versioning
+emit package.json versioning
 
 ![version](version.gif)

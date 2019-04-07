@@ -2,15 +2,15 @@ import fs from "fs-extra"
 import { join } from "path"
 import semver from "semver"
 
-module.exports = function(dot) {
-  if (dot.versionProject) {
+module.exports = function(emit) {
+  if (emit.versionProject) {
     return
   }
 
-  dot.any("versionProject", versionProject)
+  emit.any("versionProject", versionProject)
 }
 
-async function versionProject(prop, arg, dot) {
+async function versionProject(arg, prop, emit) {
   const { paths } = arg,
     baseProp = prop.slice(0, -1)
 
@@ -35,13 +35,13 @@ async function versionProject(prop, arg, dot) {
     } = pkg
 
     await Promise.all([
-      setVersions(dot, { [name]: version }),
-      setVersions(dot, dependencies),
-      setVersions(dot, devDependencies),
+      setVersions(emit, { [name]: version }),
+      setVersions(emit, dependencies),
+      setVersions(emit, devDependencies),
     ])
   }
 
-  await dot.wait(baseProp, "gatherVersions", {
+  await emit.wait(baseProp, "gatherVersions", {
     count: paths.length,
   })
 
@@ -49,21 +49,21 @@ async function versionProject(prop, arg, dot) {
     const { dependencies, devDependencies } = pkg
 
     for (const name in dependencies) {
-      dependencies[name] = dot.get("versions", name)
+      dependencies[name] = emit.get("versions", name)
     }
 
     for (const name in devDependencies) {
-      devDependencies[name] = dot.get("versions", name)
+      devDependencies[name] = emit.get("versions", name)
     }
 
     await fs.writeJson(path, pkg, { spaces: 2 })
   }
 }
 
-async function setVersions(dot, deps = {}) {
+async function setVersions(emit, deps = {}) {
   return Promise.all(
     Object.keys(deps).map(name => {
-      return dot.set("versions", name, current => {
+      return emit.set("versions", name, current => {
         let version = fixDep(deps[name])
 
         if (current) {
